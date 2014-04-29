@@ -1,0 +1,20 @@
+*.gradle
+
+### Java ###
+*.class
+ 
+# Package Files #
+*.jar
+*.war
+*.ear
+ 
+### IntelliJ ###
+*.iml
+*.ipr
+*.iws
+.idea/
+ 
+build/tmp/
+*.log
+servers/server*/
+servers/locator*
