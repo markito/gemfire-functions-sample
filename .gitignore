@@ -16,5 +16,6 @@
  
 build/tmp/
 *.log
+*.lck
 servers/server*/
 servers/locator*
