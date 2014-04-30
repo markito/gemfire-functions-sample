@@ -32,9 +32,9 @@ function validateCards(context) {
         //context.getResultSender().sendResult("Processing " + id);
         if ( (customer.ccNumber.length > 0) && (!Mod10(customer.ccNumber)) ) {
             print("Customer " + customer.name + " has an invalid credit card:" + customer.ccNumber);
-            customer.ccNumber = "";
-            region.put(id, customer);
-            counter++;
+            //customer.ccNumber = "";
+            //region.put(id, customer);
+            //counter++;
         }
     });
     context.getResultSender().lastResult("Done. " + counter + " changed objects");
