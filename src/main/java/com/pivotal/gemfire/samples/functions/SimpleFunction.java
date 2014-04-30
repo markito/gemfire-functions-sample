@@ -12,9 +12,9 @@ import com.pivotal.gemfire.samples.generator.RandomCreditCardGenerator;
  * Created by markito on 4/9/14.
  */
 public class SimpleFunction extends FunctionAdapter {
-
   @Override
   public void execute(FunctionContext functionContext) {
+
     RegionFunctionContext rfc = (RegionFunctionContext) functionContext;
     Region<Object, Customer> region = PartitionRegionHelper.getLocalDataForContext(rfc);
 

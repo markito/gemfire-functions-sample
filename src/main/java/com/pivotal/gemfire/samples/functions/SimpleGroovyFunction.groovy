@@ -15,20 +15,17 @@ public class SimpleGroovyFunction extends FunctionAdapter {
   void execute(FunctionContext functionContext) {
     RegionFunctionContext rfc = (RegionFunctionContext) functionContext;
     Region<Object,Object> region = PartitionRegionHelper.getLocalDataForContext(rfc);
-
+    int counter = 0;
     // check every credit card and clear invalid ones
     region.collect({ id, customer ->
       if (!creditCadGen.isValidCreditCardNumber(customer.ccNumber)) {
         customer.ccNumber = ""
         region.put(id, customer);
-        rfc.getResultSender().sendResult("Customer $id modified");
         println("Customer $id has an invalid credit card.");
-
+        counter++;
       }
     });
-
-    rfc.getResultSender().lastResult("Done.");
-
+    rfc.getResultSender().lastResult("Done. " + counter + " changed objects");
   }
 
   @Override

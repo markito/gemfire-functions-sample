@@ -16,9 +16,9 @@ import java.util.logging.Logger;
 /**
  * Created by markito on 4/11/14.
  */
-public class ExternalScriptFunctionAdapter extends FunctionAdapter {
+public class ExternalScriptFunction extends FunctionAdapter {
 
-  public void ExternalScriptFunctionAdapter () {
+  public void ExternalScriptFunction() {
   }
 
   @Override
@@ -42,7 +42,7 @@ public class ExternalScriptFunctionAdapter extends FunctionAdapter {
         invocable.invokeFunction(method, rfc);
 
       } catch (FileNotFoundException | ScriptException | NoSuchMethodException ex) {
-        Logger.getLogger(ExternalScriptFunctionAdapter.class.getName()).log(Level.SEVERE, null, ex);
+        Logger.getLogger(ExternalScriptFunction.class.getName()).log(Level.SEVERE, null, ex);
 
       }
     }

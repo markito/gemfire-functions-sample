@@ -10,42 +10,34 @@ function getId() {
 **/
 function execute(context) {
     var PartitionHelper = Java.type("com.gemstone.gemfire.cache.partition.PartitionRegionHelper");
-
+    counter = 0;
     var region = PartitionHelper.getLocalDataForContext(context);
     region.forEach(function (id,customer) {
-        context.getResultSender().sendResult("Processing " + id);
-
-        if (isEmailValid(customer.email)) {
-            print("Customer " + customer.name + " has a valid e-mail");
-        } else {
+        //context.getResultSender().sendResult("Processing " + id);
+        if ( (customer.email.length > 0) && (!isEmailValid(customer.email)) ) {
             print("Customer " + customer.name + " has an invalid e-mail");
+            customer.email = "";
+            region.put(id,customer);
+            counter++;
         }
     });
-    context.getResultSender().lastResult("Done.");
-
-}
-/**
-* test function
-**/
-function whereIAm(context) {
-   print ("Running here...");
-   context.getResultSender().lastResult("Done.");
+    context.getResultSender().lastResult("Done. " + counter + " changed objects");
 }
 
 function validateCards(context) {
     var PartitionHelper = Java.type("com.gemstone.gemfire.cache.partition.PartitionRegionHelper");
-
+    counter = 0;
     var region = PartitionHelper.getLocalDataForContext(context);
     region.forEach(function (id,customer) {
-        context.getResultSender().sendResult("Processing " + id);
-
-        if (Mod10(customer.ccNumber)) {
-            print("Customer " + customer.name + " has a valid credit card:" + customer.ccNumber);
-        } else {
+        //context.getResultSender().sendResult("Processing " + id);
+        if ( (customer.ccNumber.length > 0) && (!Mod10(customer.ccNumber)) ) {
             print("Customer " + customer.name + " has an invalid credit card:" + customer.ccNumber);
+            customer.ccNumber = "";
+            region.put(id, customer);
+            counter++;
         }
     });
-    context.getResultSender().lastResult("Done.");
+    context.getResultSender().lastResult("Done. " + counter + " changed objects");
 }
 
 
